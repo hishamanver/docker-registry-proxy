@@ -39,9 +39,9 @@ else
 fi
 
 # Generate nginx upstream blocks into file. Function similar to a /etc/hosts file but includes round-robin selection
-# e.g when UPSTREAM_MAPPING="registry1=10.0.1.10,10.0.1.11 registry2=5.0.1.10", the following file is generated
+# e.g when UPSTREAM_MAPPING="registry1=10.0.1.10:443,10.0.1.11 registry2=5.0.1.10", the following file is generated
 # upstream registry1 {
-#         server 10.0.1.10;
+#         server 10.0.1.10:443;
 #         server 10.0.1.11;
 # }
 # upstream registry2 {
