@@ -39,7 +39,7 @@ else
 fi
 
 # Generate nginx upstream blocks into file. Function similar to a /etc/hosts file but includes round-robin selection
-# e.g when UPSTREAM_MAPPING="registry1=10.0.1.10:443,10.0.1.11 registry2=5.0.1.10", the following file is generated
+# e.g when UPSTREAM_MAPPINGS="registry1=10.0.1.10:443,10.0.1.11 registry2=5.0.1.10", the following file is generated
 # upstream registry1 {
 #         server 10.0.1.10:443;
 #         server 10.0.1.11;
@@ -49,9 +49,9 @@ fi
 # }
 echo -n "" >> /etc/nginx/upstreams.conf
 
-if [ "$UPSTREAM_MAPPING" ]; then
+if [ ! -z "$UPSTREAM_MAPPINGS" ]; then
 
-    for UPSTREAM in ${UPSTREAM_MAPPING}; do
+    for UPSTREAM in ${UPSTREAM_MAPPINGS}; do
         echo "upstream ${UPSTREAM%=*} {" >> /etc/nginx/upstreams.conf
         comma_separated_hosts="${UPSTREAM#*=}"
         hosts=`echo $comma_separated_hosts | tr ',' ' '`
