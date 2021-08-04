@@ -143,7 +143,7 @@ echo -n "" >/etc/nginx/nginx.manifest.caching.config.conf
     location ~ ^/v2/(.*)/manifests/${MANIFEST_CACHE_PRIMARY_REGEX} {
         set \$docker_proxy_request_type "manifest-primary";
         proxy_cache_valid ${MANIFEST_CACHE_PRIMARY_TIME};
-        include "/etc/nginx/nginx.manifest.stale.conf";
+        include "/etc/nginx/nginx.manifest.common.conf";
     }
 EOD
 
@@ -152,7 +152,7 @@ EOD
     location ~ ^/v2/(.*)/manifests/${MANIFEST_CACHE_SECONDARY_REGEX} {
         set \$docker_proxy_request_type "manifest-secondary";
         proxy_cache_valid ${MANIFEST_CACHE_SECONDARY_TIME};
-        include "/etc/nginx/nginx.manifest.stale.conf";
+        include "/etc/nginx/nginx.manifest.common.conf";
     }
 EOD
 
@@ -161,7 +161,7 @@ EOD
     location ~ ^/v2/(.*)/manifests/ {
         set \$docker_proxy_request_type "manifest-default";
         proxy_cache_valid ${MANIFEST_CACHE_DEFAULT_TIME};
-        include "/etc/nginx/nginx.manifest.stale.conf";
+        include "/etc/nginx/nginx.manifest.common.conf";
     }
 EOD
 
@@ -170,7 +170,7 @@ EOD
     location ~ ^/v2/(.*)/manifests/ {
         set \$docker_proxy_request_type "manifest-default-disabled";
         proxy_cache_valid 0s;
-        include "/etc/nginx/nginx.manifest.stale.conf";
+        include "/etc/nginx/nginx.manifest.common.conf";
     }
 EOD
 
